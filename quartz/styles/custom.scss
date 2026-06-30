@@ -196,6 +196,53 @@ a.internal.tag-link:hover,
   font-family: var(--font-sans);
 }
 
+/* ---- Single-column layout: cap the full-width frame to a reading column -- */
+.page[data-frame="full-width"] .center.full-width {
+  max-width: 780px;
+  min-width: 0;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  box-sizing: border-box;
+}
+.center.full-width article {
+  max-width: 100%;
+  margin-inline: 0;
+}
+
+/* Masthead row (page-title + controls grouped via Flex): brand left, controls
+   right, ruled bottom. The group renders as .flex-component containing .page-title. */
+.popover-hint .flex-component:has(.page-title) {
+  align-items: center;
+  margin: 1.25rem 0 1.75rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--lightgray);
+}
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+.page-title a {
+  color: var(--garnet);
+}
+/* Masthead controls (search / darkmode / reader) stay compact & sans. */
+.popover-hint .flex-component:has(.page-title) > *:not(:has(.page-title)) {
+  font-family: var(--font-sans);
+}
+
+/* Inline TOC (now above the article) — quiet card, sans. */
+.center.full-width .toc {
+  font-family: var(--font-sans);
+  margin-bottom: 1.5rem;
+}
+
+/* Backlinks moved below the article — sans, muted. */
+.page-footer .backlinks {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
 /* ---- Reduced motion ----------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   * {

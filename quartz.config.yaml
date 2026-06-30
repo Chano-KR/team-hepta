@@ -84,8 +84,9 @@ plugins:
     enabled: true
     order: 50
     layout:
-      position: right
-      priority: 30
+      # single-column layout: TOC moves inline above the article (collapsible).
+      position: beforeBody
+      priority: 25
   - source: github:quartz-community/crawl-links
     enabled: true
     options:
@@ -157,28 +158,28 @@ plugins:
   - source: github:quartz-community/tag-page
     enabled: true
   - source: github:quartz-community/explorer
-    enabled: true
+    # removed: file-tree sidebar reads as docs-wiki, not a blog (single-column masthead layout).
+    enabled: false
     layout:
       position: left
       priority: 50
   - source: github:quartz-community/graph
-    enabled: true
+    # removed: graph view is wiki chrome, not needed for an editorial blog.
+    enabled: false
     layout:
       position: right
       priority: 10
   - source: github:quartz-community/search
     enabled: true
     layout:
-      position: left
-      priority: 20
-      group: toolbar
-      groupOptions:
-        grow: true
+      position: beforeBody
+      priority: 2
+      group: masthead
   - source: github:quartz-community/backlinks
     enabled: true
     layout:
-      position: right
-      priority: 50
+      position: afterBody
+      priority: 40
   - source: github:quartz-community/article-title
     enabled: true
     layout:
@@ -197,20 +198,23 @@ plugins:
   - source: github:quartz-community/page-title
     enabled: true
     layout:
-      position: left
-      priority: 10
+      position: beforeBody
+      priority: 1
+      group: masthead
+      groupOptions:
+        grow: true
   - source: github:quartz-community/darkmode
     enabled: true
     layout:
-      position: left
-      priority: 30
-      group: toolbar
+      position: beforeBody
+      priority: 4
+      group: masthead
   - source: github:quartz-community/reader-mode
     enabled: true
     layout:
-      position: left
-      priority: 35
-      group: toolbar
+      position: beforeBody
+      priority: 3
+      group: masthead
   - source: github:quartz-community/breadcrumbs
     enabled: true
     layout:
@@ -229,12 +233,12 @@ plugins:
     enabled: true
     options:
       links:
-        GitHub: https://github.com/jackyzha0/quartz
-        Discord Community: https://discord.gg/cRFFHYye7t
+        GitHub: https://github.com/Chano-KR
   - source: github:quartz-community/recent-notes
     enabled: false
   - source: github:quartz-community/spacer
-    enabled: true
+    # disabled: was a left-toolbar mobile spacer; no left sidebar anymore.
+    enabled: false
     options: {}
     order: 25
     layout:
@@ -278,26 +282,33 @@ plugins:
     order: 50
 layout:
   groups:
+    # Masthead row: brand (page-title, grows) on the left, controls on the right.
+    masthead:
+      priority: 1
+      direction: row
+      gap: 0.75rem
     toolbar:
       priority: 35
       direction: row
       gap: 0.5rem
   byPageType:
     "404":
+      template: full-width
       positions:
         beforeBody: []
         left: []
         right: []
-    content: {}
+    # full-width frame = single column (no sidebars); CSS caps it to a reading
+    # column and centers it. Masthead lives in the `header` position.
+    content:
+      template: full-width
     folder:
+      template: full-width
       exclude:
         - reader-mode
-      positions:
-        right: []
     tag:
+      template: full-width
       exclude:
         - reader-mode
-      positions:
-        right: []
     canvas: {}
     bases: {}
