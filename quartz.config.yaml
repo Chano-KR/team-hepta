@@ -7,7 +7,7 @@ configuration:
   analytics:
     provider: null
   locale: ko-KR
-  baseUrl: chano-kr.github.io/garden
+  baseUrl: chano-kr.github.io/team-hepta
   ignorePatterns:
     - private
     - templates

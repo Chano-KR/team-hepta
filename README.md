@@ -1,6 +1,6 @@
-# garden
+# team-hepta
 
-"가든" channel of the [content-syndication](https://github.com/Chano-KR/content-syndication)
+The "가든" channel of the [content-syndication](https://github.com/Chano-KR/content-syndication)
 pipeline — a [Quartz](https://quartz.jzhao.xyz) site that renders the Obsidian
 SoT notes **~1:1** (no channel rewrite).
 
@@ -8,6 +8,6 @@ SoT notes **~1:1** (no channel rewrite).
   content-syndication repo, then pushed here.
 - GitHub Actions (`.github/workflows/deploy.yml`) builds and deploys to GitHub
   Pages on every push to `v5`.
-- Live: https://chano-kr.github.io/garden
+- Live: https://chano-kr.github.io/team-hepta
 
 Local preview: `npm ci && npx quartz build --serve`
