@@ -15,34 +15,31 @@ configuration:
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
-    # Garnet Editorial (§9d blog): serif reading (header), Korean-safe sans chrome (body).
     typography:
-      header: Newsreader
-      body: Noto Serif KR
-      code: JetBrains Mono
-    # All OKLCH (Garnet tokens). Neutrals carry a whisper of hue 20 (not corporate gray).
-    # secondary/tertiary = cool blue links (garnet reserved as the point color in custom.scss).
+      header: Schibsted Grotesk
+      body: Source Sans Pro
+      code: IBM Plex Mono
     colors:
       lightMode:
-        light: "oklch(1 0 0)"
-        lightgray: "oklch(0.915 0.006 20)"
-        gray: "oklch(0.530 0.009 20)"
-        darkgray: "oklch(0.235 0.006 20)"
-        dark: "oklch(0.145 0.005 20)"
-        secondary: "oklch(0.450 0.100 238)"
-        tertiary: "oklch(0.520 0.100 235)"
-        highlight: "oklch(0.955 0.010 235 / 0.6)"
-        textHighlight: "oklch(0.900 0.120 95 / 0.45)"
+        light: "#faf8f8"
+        lightgray: "#e5e5e5"
+        gray: "#b8b8b8"
+        darkgray: "#4e4e4e"
+        dark: "#2b2b2b"
+        secondary: "#284b63"
+        tertiary: "#84a59d"
+        highlight: rgba(143, 159, 169, 0.15)
+        textHighlight: "#fff23688"
       darkMode:
-        light: "oklch(0.145 0.004 20)"
-        lightgray: "oklch(0.300 0.006 20)"
-        gray: "oklch(0.620 0.008 20)"
-        darkgray: "oklch(0.900 0.005 20)"
-        dark: "oklch(0.970 0.004 20)"
-        secondary: "oklch(0.680 0.110 232)"
-        tertiary: "oklch(0.760 0.100 232)"
-        highlight: "oklch(0.300 0.040 235 / 0.4)"
-        textHighlight: "oklch(0.550 0.100 95 / 0.4)"
+        light: "#161618"
+        lightgray: "#393639"
+        gray: "#646464"
+        darkgray: "#d4d4d4"
+        dark: "#ebebec"
+        secondary: "#7b97aa"
+        tertiary: "#84a59d"
+        highlight: rgba(143, 159, 169, 0.15)
+        textHighlight: "#b3aa0288"
 plugins:
   - source: github:quartz-community/created-modified-date
     enabled: true
@@ -84,9 +81,8 @@ plugins:
     enabled: true
     order: 50
     layout:
-      # single-column layout: TOC moves inline above the article (collapsible).
-      position: beforeBody
-      priority: 25
+      position: right
+      priority: 30
   - source: github:quartz-community/crawl-links
     enabled: true
     options:
@@ -145,8 +141,7 @@ plugins:
   - source: github:quartz-community/favicon
     enabled: true
   - source: github:quartz-community/og-image
-    # disabled: the satori OG renderer can't parse the site's OKLCH theme colors.
-    enabled: false
+    enabled: true
   - source: github:quartz-community/cname
     enabled: true
   - source: github:quartz-community/canvas-page
@@ -158,33 +153,28 @@ plugins:
   - source: github:quartz-community/tag-page
     enabled: true
   - source: github:quartz-community/explorer
-    # category nav: shows the folder taxonomy in the left rail on listing
-    # (folder/tag) pages. Content pages (home + articles) are full-width = no rail.
     enabled: true
-    options:
-      title: 카테고리
-      folderDefaultState: open
-      useSavedState: true
     layout:
       position: left
       priority: 50
   - source: github:quartz-community/graph
-    # removed: graph view is wiki chrome, not needed for an editorial blog.
-    enabled: false
+    enabled: true
     layout:
       position: right
       priority: 10
   - source: github:quartz-community/search
     enabled: true
     layout:
-      position: beforeBody
-      priority: 2
-      group: masthead
+      position: left
+      priority: 20
+      group: toolbar
+      groupOptions:
+        grow: true
   - source: github:quartz-community/backlinks
     enabled: true
     layout:
-      position: afterBody
-      priority: 40
+      position: right
+      priority: 50
   - source: github:quartz-community/article-title
     enabled: true
     layout:
@@ -203,23 +193,20 @@ plugins:
   - source: github:quartz-community/page-title
     enabled: true
     layout:
-      position: beforeBody
-      priority: 1
-      group: masthead
-      groupOptions:
-        grow: true
+      position: left
+      priority: 10
   - source: github:quartz-community/darkmode
     enabled: true
     layout:
-      position: beforeBody
-      priority: 4
-      group: masthead
+      position: left
+      priority: 30
+      group: toolbar
   - source: github:quartz-community/reader-mode
     enabled: true
     layout:
-      position: beforeBody
-      priority: 3
-      group: masthead
+      position: left
+      priority: 35
+      group: toolbar
   - source: github:quartz-community/breadcrumbs
     enabled: true
     layout:
@@ -238,12 +225,12 @@ plugins:
     enabled: true
     options:
       links:
-        GitHub: https://github.com/Chano-KR
+        GitHub: https://github.com/jackyzha0/quartz
+        Discord Community: https://discord.gg/cRFFHYye7t
   - source: github:quartz-community/recent-notes
     enabled: false
   - source: github:quartz-community/spacer
-    # disabled: was a left-toolbar mobile spacer; no left sidebar anymore.
-    enabled: false
+    enabled: true
     options: {}
     order: 25
     layout:
@@ -277,7 +264,7 @@ plugins:
       subdir: plugin
     enabled: true
     options:
-      theme: default
+      theme: github-flavored-markdown
   - source: github:quartz-community/obsidian-plugin-excalidraw
     enabled: true
     options:
@@ -287,31 +274,26 @@ plugins:
     order: 50
 layout:
   groups:
-    # Masthead row: brand (page-title, grows) on the left, controls on the right.
-    masthead:
-      priority: 1
-      direction: row
-      gap: 0.75rem
     toolbar:
       priority: 35
       direction: row
       gap: 0.5rem
   byPageType:
     "404":
-      template: full-width
       positions:
         beforeBody: []
         left: []
         right: []
-    # full-width frame = single column (no sidebars); CSS caps it to a reading
-    # column and centers it. Masthead lives in the `header` position.
-    content:
-      template: full-width
+    content: {}
     folder:
       exclude:
         - reader-mode
+      positions:
+        right: []
     tag:
       exclude:
         - reader-mode
+      positions:
+        right: []
     canvas: {}
     bases: {}
