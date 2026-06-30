@@ -158,8 +158,13 @@ plugins:
   - source: github:quartz-community/tag-page
     enabled: true
   - source: github:quartz-community/explorer
-    # removed: file-tree sidebar reads as docs-wiki, not a blog (single-column masthead layout).
-    enabled: false
+    # category nav: shows the folder taxonomy in the left rail on listing
+    # (folder/tag) pages. Content pages (home + articles) are full-width = no rail.
+    enabled: true
+    options:
+      title: 카테고리
+      folderDefaultState: open
+      useSavedState: true
     layout:
       position: left
       priority: 50
@@ -303,11 +308,9 @@ layout:
     content:
       template: full-width
     folder:
-      template: full-width
       exclude:
         - reader-mode
     tag:
-      template: full-width
       exclude:
         - reader-mode
     canvas: {}
