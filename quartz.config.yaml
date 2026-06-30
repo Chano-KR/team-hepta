@@ -15,31 +15,34 @@ configuration:
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
+    # Garnet Editorial (§9d blog): serif reading (header), Korean-safe sans chrome (body).
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
-      code: IBM Plex Mono
+      header: Newsreader
+      body: Noto Serif KR
+      code: JetBrains Mono
+    # All OKLCH (Garnet tokens). Neutrals carry a whisper of hue 20 (not corporate gray).
+    # secondary/tertiary = cool blue links (garnet reserved as the point color in custom.scss).
     colors:
       lightMode:
-        light: "#faf8f8"
-        lightgray: "#e5e5e5"
-        gray: "#b8b8b8"
-        darkgray: "#4e4e4e"
-        dark: "#2b2b2b"
-        secondary: "#284b63"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#fff23688"
+        light: "oklch(1 0 0)"
+        lightgray: "oklch(0.915 0.006 20)"
+        gray: "oklch(0.530 0.009 20)"
+        darkgray: "oklch(0.235 0.006 20)"
+        dark: "oklch(0.145 0.005 20)"
+        secondary: "oklch(0.450 0.100 238)"
+        tertiary: "oklch(0.520 0.100 235)"
+        highlight: "oklch(0.955 0.010 235 / 0.6)"
+        textHighlight: "oklch(0.900 0.120 95 / 0.45)"
       darkMode:
-        light: "#161618"
-        lightgray: "#393639"
-        gray: "#646464"
-        darkgray: "#d4d4d4"
-        dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#b3aa0288"
+        light: "oklch(0.145 0.004 20)"
+        lightgray: "oklch(0.300 0.006 20)"
+        gray: "oklch(0.620 0.008 20)"
+        darkgray: "oklch(0.900 0.005 20)"
+        dark: "oklch(0.970 0.004 20)"
+        secondary: "oklch(0.680 0.110 232)"
+        tertiary: "oklch(0.760 0.100 232)"
+        highlight: "oklch(0.300 0.040 235 / 0.4)"
+        textHighlight: "oklch(0.550 0.100 95 / 0.4)"
 plugins:
   - source: github:quartz-community/created-modified-date
     enabled: true
@@ -141,7 +144,8 @@ plugins:
   - source: github:quartz-community/favicon
     enabled: true
   - source: github:quartz-community/og-image
-    enabled: true
+    # disabled: the satori OG renderer can't parse the site's OKLCH theme colors.
+    enabled: false
   - source: github:quartz-community/cname
     enabled: true
   - source: github:quartz-community/canvas-page

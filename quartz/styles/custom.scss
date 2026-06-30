@@ -1,3 +1,205 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+/* ============================================================================
+   Garnet Editorial — Quartz §9d blog adapter
+   Serif reading column (Newsreader + Noto Serif KR), Korean-safe sans chrome,
+   garnet as the single point color, cool-blue links. All color OKLCH.
+   Color slots (--light/--dark/--secondary…) are set in quartz.config.yaml.
+   ========================================================================== */
+
+/* Fonts: config googleFonts loads Newsreader (header) + Noto Serif KR (body) +
+   JetBrains Mono (code). Sans chrome uses the platform Korean sans (no extra
+   web load); @import url() can't be used here — Quartz concatenates stylesheets
+   and CSS requires @import to precede all rules. */
+
+:root {
+  --font-serif: "Newsreader", "Noto Serif KR", Georgia, "Times New Roman", serif;
+  --font-sans: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic",
+    system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Garnet — the single point color (reserved for masthead/accents). */
+  --garnet: oklch(0.440 0.128 20);
+  --garnet-hover: oklch(0.530 0.135 21);
+  --garnet-tint: oklch(0.970 0.018 22);
+
+  /* Reading rhythm */
+  --read-column: 720px;
+  --lh-relaxed: 1.72;
+}
+
+:root[saved-theme="dark"] {
+  --garnet: oklch(0.660 0.135 22); /* lifted to read on near-black */
+  --garnet-hover: oklch(0.720 0.140 22);
+  --garnet-tint: oklch(0.280 0.060 20);
+}
+
+/* ---- Reading column: serif prose ---------------------------------------- */
+.center article {
+  font-family: var(--font-serif);
+  font-size: 1.075rem;
+  line-height: var(--lh-relaxed);
+  max-width: var(--read-column);
+  margin-inline: auto;
+  text-wrap: pretty;
+}
+
+.center article p,
+.center article li {
+  font-family: var(--font-serif);
+}
+
+/* ---- Headings: serif, strong ink, Korean-safe --------------------------- */
+.page-title,
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6 {
+  font-family: var(--font-serif);
+  color: var(--dark);
+  word-break: keep-all;
+  letter-spacing: 0; /* Hangul: never negative tracking */
+  text-wrap: balance;
+}
+
+article h1 {
+  font-weight: 700;
+  font-size: clamp(2rem, 1.6rem + 2vw, 2.8rem);
+  line-height: 1.2;
+  margin-top: 2.4rem;
+}
+article h2 {
+  font-weight: 600;
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 1.95rem);
+  line-height: 1.28;
+  margin-top: 2.6rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--lightgray);
+}
+article h3 {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+}
+
+/* Masthead / page title — the one garnet moment. */
+.page-title,
+.page-title a {
+  color: var(--garnet);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* ---- Links: cool blue, editorial underline ------------------------------ */
+.center article a,
+article p a {
+  color: var(--secondary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in oklch, var(--secondary) 45%, transparent);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+.center article a:hover {
+  color: var(--tertiary);
+  text-decoration-color: currentColor;
+}
+
+/* ---- Blockquote: tinted card, serif — NO left stripe (anti-slop §11) ----- */
+article blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--dark);
+  background: var(--garnet-tint);
+  border: 1px solid var(--lightgray);
+  border-left: 1px solid var(--lightgray); /* override Quartz colored stripe */
+  border-radius: 14px;
+  padding: 1rem 1.4rem;
+  margin: 1.8rem 0;
+}
+
+/* ---- Selection: garnet tint --------------------------------------------- */
+::selection {
+  background: color-mix(in oklch, var(--garnet) 22%, transparent);
+}
+
+/* ---- Code: mono, sunken surface ----------------------------------------- */
+article :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--lightgray);
+  border-radius: 6px;
+  padding: 0.12em 0.4em;
+}
+article pre {
+  font-family: var(--font-mono);
+  border: 1px solid var(--lightgray);
+  border-radius: 14px;
+}
+
+/* ---- Chrome: sans, clean (nav / sidebar / meta / tags / footer) --------- */
+.breadcrumb-container,
+.explorer,
+.toc,
+#toc-content,
+.sidebar,
+.page-footer,
+footer,
+.content-meta,
+.search,
+.darkmode,
+.tags,
+.backlinks {
+  font-family: var(--font-sans);
+}
+
+/* Article meta (date / reading time): sans, muted, aligned numerals. */
+.content-meta {
+  color: var(--gray);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Tags: neutral pills, garnet on hover ------------------------------- */
+a.internal.tag-link,
+.tags > li > a {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  background: var(--lightgray);
+  color: var(--darkgray);
+  border-radius: 999px;
+  padding: 0.18rem 0.7rem;
+  border: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+a.internal.tag-link:hover,
+.tags > li > a:hover {
+  background: var(--garnet-tint);
+  color: var(--garnet);
+}
+
+/* ---- Active nav / current page: garnet accent --------------------------- */
+.explorer .file a.active {
+  color: var(--garnet);
+  font-weight: 600;
+}
+
+/* Quietly de-slop Quartz section kickers: no tracked uppercase eyebrows. */
+.toc > h3,
+.recent-notes > h3,
+.explorer > button,
+.backlinks > h3 {
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--font-sans);
+}
+
+/* ---- Reduced motion ----------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
