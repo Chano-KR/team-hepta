@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: 가든 — 영어교육 × AI
+  pageTitle: AI EduTech Blog
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
@@ -15,9 +15,10 @@ configuration:
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
+    # Serif everywhere (text); code stays mono.
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
+      header: Newsreader
+      body: Noto Serif KR
       code: IBM Plex Mono
     colors:
       lightMode:

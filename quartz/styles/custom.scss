@@ -1,3 +1,35 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+/* Serif everywhere (overrides the theme's default font). Korean: Noto Serif KR
+   (loaded via config typography). Code stays monospace. */
+$serif: "Newsreader", "Noto Serif KR", Georgia, "Times New Roman", serif;
+
+:root {
+  --bodyFont: #{$serif};
+  --headerFont: #{$serif};
+  --titleFont: #{$serif};
+}
+
+body,
+p,
+li,
+a,
+blockquote,
+h1, h2, h3, h4, h5, h6,
+.page-title,
+article,
+.explorer,
+.toc,
+.sidebar,
+footer {
+  font-family: #{$serif};
+}
+
+/* Keep code/preformatted monospace. */
+code,
+pre,
+kbd,
+tt,
+.code {
+  font-family: var(--codeFont), "IBM Plex Mono", ui-monospace, monospace;
+}

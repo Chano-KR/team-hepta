@@ -1,11 +1,11 @@
 ---
-title: 가든
+title: Team Hepta.
 ---
 
-영어교육 × AI 의 작업 노트를 거의 가공 없이 공개하는 **가든**.
+영어교육 × AI 의 작업 노트를 거의 가공 없이 공개하는 **Team Hepta.**.
 
 완성글의 진실원천(SoT)에서 그대로 렌더된 원본 노트 모음입니다. AI를 영어교육에
 어떻게 쓰는지를 결과물과 방법으로 함께 기록합니다.
 
-> 이 사이트는 content-syndication 파이프라인의 "가든" 채널입니다 — Obsidian SoT를
+> 이 사이트는 content-syndication 파이프라인의 "Team Hepta." 채널입니다 — Obsidian SoT를
 > 1:1로 렌더합니다(재작성 없음).
